@@ -150,3 +150,17 @@ export const resetPassword = async (payload, token, prefix) => {
     });
   }
 };
+
+
+export async function submitForm(response) {
+  try {
+    const token = await localStorage.getItem("accessToken");
+    const data = await axios.post("/warehouse/companies/", response, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject({ error: "Couldn't Update Profile...!" });
+  }
+}
