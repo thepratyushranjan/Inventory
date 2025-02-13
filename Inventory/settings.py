@@ -9,7 +9,8 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["13.234.76.214", "inventory-tau-five.vercel.app"] 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://192.168.1.6:5173",
