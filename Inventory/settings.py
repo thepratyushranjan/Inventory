@@ -15,6 +15,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.1.6:5173",
     "http://172.18.0.1:5173",
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
