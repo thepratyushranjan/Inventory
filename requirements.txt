@@ -10,7 +10,7 @@ ffmpeg-python==0.2.0
 future==1.0.0
 imageio==2.36.1
 imageio-ffmpeg==0.5.1
-mysqlclient
+# mysqlclient
 numpy==2.2.1
 pillow==10.4.0
 proglog==0.1.10
