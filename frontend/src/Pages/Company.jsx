@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import useFetch from "../hooks/fetch.hook";
 import TopLabel from "../Components/TopLabel";
+import { deleteCompany } from "../helper/helper";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Company = ({
   label = "Company",
@@ -39,8 +43,29 @@ const Company = ({
 
   const handleAdd = () => navigate("/add-company");
   const handleEdit = (id) => console.log("Edit company ID:", id);
-  const handleDelete = (id) => console.log("Delete company ID:", id);
-  const handleView = (id) => console.log("View details for company ID:", id);
+  const handleView = (id) => navigate(`/company-details/${id}`);
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteCompany(id);
+        setCurrentItems(currentItems.filter((company) => company.id !== id));
+        toast.success("Company deleted successfully!");
+      } catch (err) {r
+        toast.error(err.error || "Failed to delete company");
+      }
+    }
+  };
 
   const addCompanyButton = (
     <button
@@ -56,8 +81,6 @@ const Company = ({
       Add Company
     </button>
   );
-
-  const allBtnContent = [addCompanyButton, ...btnContent]; // Combine addCompanyButton with other buttons
 
   const renderPagination = () => {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -104,7 +127,7 @@ const Company = ({
         paddingBlock="14px"
         borderBottom="none"
         optionInput={optionInput}
-        btnContent={allBtnContent}  // Updated here
+        btnContent={[addCompanyButton, ...btnContent]}
         link={link}
         border={border}
       />

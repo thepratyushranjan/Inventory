@@ -152,6 +152,7 @@ export const resetPassword = async (payload, token, prefix) => {
 };
 
 
+
 export async function submitForm(response) {
   try {
     const token = await localStorage.getItem("accessToken");
@@ -162,5 +163,50 @@ export async function submitForm(response) {
     return Promise.resolve({ data });
   } catch (error) {
     return Promise.reject({ error: "Couldn't Update Profile...!" });
+  }
+}
+
+export async function update_company(response) {
+  try {
+    const token = await localStorage.getItem("accessToken");
+    const data = await axios.post("/warehouse/companies/", response, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject({ error: "Couldn't Update Profile...!" });
+  }
+}
+
+// Use the company ID in the URL to fetch details
+
+export async function companyDetail(id) {
+  try {
+    const token = await localStorage.getItem("accessToken");
+    const { data } = await axios.get(`/warehouse/companies/${id}/`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject({ error: "Couldn't fetch company details...!" });
+  }
+}
+
+// Send DELETE request
+
+export async function deleteCompany(id) {
+  try {
+    const token = await localStorage.getItem("accessToken");
+
+    
+    const { data } = await axios.delete(`/warehouse/companies/${id}/`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject({ error: "Couldn't delete company...!" });
   }
 }

@@ -24,6 +24,7 @@ import Add from "./Pages/Add";
 import ProfilePage from "./Pages/ProfilePage";
 import Company from "./Pages/Company";
 import CompanyForm from "./Pages/CompanyForm";
+import OneView from "./Pages/OneView";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,6 +85,7 @@ const App = () => {
                       <Route path="/add" element={<Add />} />
                       <Route path="/profile" element={<ProfilePage />} />
                       <Route path="/add-company" element={<CompanyForm />} />
+                      <Route path="/company-details/:id" element={<OneView />} />
                       <Route path="*" element={<Navigate to="/dashboard" />} />
                     </Routes>
                   </main>
