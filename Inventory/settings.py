@@ -14,6 +14,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://192.168.1.6:5173",
     "http://172.18.0.1:5173",
+    "https://inventory-tau-five.vercel.app",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
